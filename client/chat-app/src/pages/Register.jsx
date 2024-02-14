@@ -19,7 +19,11 @@ const Register = () => {
                 password
             }
 
-            let response = await axios.post("http://localhost:3000/register", requestBody)
+            let response = await axios.post("http://localhost:3000/register", requestBody, {
+                headers: {
+                    'Access-Control-Allow-Origin': '*'
+                }
+            })
             console.log(response.data);
 
             navigate("/login")
