@@ -12,6 +12,9 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      User.hasMany(models.Conversation, {foreignKey: 'senderId'})
+      User.hasMany(models.Conversation, {foreignKey: 'receiverId'})
+      User.hasMany(models.Message, {foreignKey: 'senderId'})
     }
   }
   User.init({
@@ -21,7 +24,7 @@ module.exports = (sequelize, DataTypes) => {
       validate: {
         notNull: {
           args: true,
-          msg: "Name isrequired"
+          msg: "Name is required"
         },
         notEmpty: {
           args: true,
