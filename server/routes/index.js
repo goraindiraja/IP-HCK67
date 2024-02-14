@@ -14,6 +14,10 @@ router.post("/login", userController.userLogin)
 /* Create Conversation */
 router.post("/conversation", conversationController.createConversation)
 
+/* Get Conversation By UserId */
+router.get("/conversation/:userId", conversationController.getUserConversation)
+
+
 
 
 
