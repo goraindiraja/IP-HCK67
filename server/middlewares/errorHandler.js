@@ -20,6 +20,12 @@ const errorHandler = (error, req, res, next) => {
             status = 401
             message = "Invalid Email / Password"
             break
+
+        case "InvalidToken":
+        case "JsonWebTokenError": 
+            status = 401
+            message = "Unauthenticated"
+            break
     }
 
     res.status(status).json({message})

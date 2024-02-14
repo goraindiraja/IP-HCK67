@@ -59,6 +59,22 @@ class userController {
             next(error)
         }
     }
+
+    static async getAllUsers(req,res,next){
+        try {
+            let users = await User.findAll({
+                attributes: {
+                    exclude: ["password","createdAt", "updatedAt"]
+                }
+            })
+
+            res.status(200).json(users)
+
+        } catch (error) {
+            console.log(error);
+            next(error)
+        }
+    }
 }
 
 module.exports = userController

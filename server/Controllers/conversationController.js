@@ -2,13 +2,26 @@ const {Conversation, User, Message} = require('../models');
 const { Op } = require("sequelize");
 
 class conversationController {
-    static async createConversation (req, res, next){
+
+    static async getAllConversation(req,res,next){
         try {
-            let {senderId, receiverId} = req.body
-            
-            let conversation = await Conversation.create({
-                senderId,
-                receiverId
+            let conversation = await Conversation.findAll({
+                include: [
+                    {
+                        model: User,
+                        as: "sender",
+                        attributes: {
+                            exclude: ['password', 'createdAt', 'updatedAt']
+                        }
+                    },
+                    {
+                        model: User,
+                        as: "receiver",
+                        attributes: {
+                            exclude: ['password', 'createdAt', 'updatedAt']
+                        }
+                    }
+                ]
             })
 
             res.status(200).json(conversation)
@@ -19,20 +32,41 @@ class conversationController {
         }
     }
 
+    // static async createConversation (req, res, next){
+    //     try {
+    //         let {senderId, receiverId} = req.body
+            
+    //         let conversation = await Conversation.create({
+    //             senderId,
+    //             receiverId
+    //         })
+
+    //         res.status(200).json(conversation)
+
+    //     } catch (error) {
+    //         console.log(error);
+    //         next(error)
+    //     }
+    // }
+
     static async getUserConversation(req, res, next){
         try {
-            const {userId} = req.params
+            const {receiverId} = req.params
 
-            let conversation = await Conversation.findAll({
+            let [conversation, created] = await Conversation.findOrCreate({
                 where: {
                     [Op.or]: [
-                        { senderId: +userId },
-                        { receiverId: +userId }
+                        { senderId: req.user.id, receiverId: receiverId},
+                        { senderId: receiverId, receiverId: req.user.id }
                     ]
+                },
+                defaults: {
+                    senderId: req.user.id,
+                    receiverId: receiverId
                 }
             })
 
-            res.status(200).json(conversation)
+            return res.status(200).json(conversation)
 
         } catch (error) {
             console.log(error);
