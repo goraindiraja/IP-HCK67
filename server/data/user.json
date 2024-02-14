@@ -1,0 +1,37 @@
+[
+    {
+        "id": 1,
+        "name": "John Doe",
+        "email": "john@test.com",
+        "password": "john123",
+        "imageUrl" : "https://randomuser.me/api/portraits/men/34.jpg"
+    },
+    {
+        "id": 2,
+        "name": "Jane Smith",
+        "email": "jane@test.com",
+        "password": "jane123",
+        "imageUrl" : "https://randomuser.me/api/portraits/men/76.jpg"
+    },
+    {
+        "id": 3,
+        "name": "Alice Johnson",
+        "email": "alice@test.com",
+        "password": "alice123",
+        "imageUrl" : "https://randomuser.me/api/portraits/women/90.jpg"
+    },
+    {
+        "id": 4,
+        "name": "Bob Brown",
+        "email": "bob@test.com",
+        "password": "bob123",
+        "imageUrl" : "https://randomuser.me/api/portraits/men/44.jpg"
+    },
+    {
+        "id": 5,
+        "name": "Charlie Davids",
+        "email": "charlie@test.com",
+        "password": "charlie123",
+        "imageUrl" : "https://randomuser.me/api/portraits/men/83.jpg"
+    }
+]
