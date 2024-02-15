@@ -1,5 +1,5 @@
 import React from 'react'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 const Navbar = () => {
     const navigate = useNavigate()
@@ -29,7 +29,7 @@ const Navbar = () => {
                             </div>
                         </div>
                         <ul tabIndex={0} className="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-slate-800 rounded-lg w-52">
-                            <li> <a>Profile</a></li>
+                            <li> <Link to="/profiles">Profile</Link></li>
                             <li> <a onClick={handleLogout}>Logout</a></li>
                         </ul>
                     </div>

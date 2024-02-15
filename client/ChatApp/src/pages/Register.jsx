@@ -1,7 +1,37 @@
-import React from 'react'
-import { Link } from 'react-router-dom';
+import axios from 'axios';
+import React, { useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom';
 
 const Register = () => {
+  const navigate = useNavigate()
+  const [name, setName] = useState("")
+  const [email, setEmail] = useState("")
+  const [password, setPassword] = useState("")
+
+  const handleRegister = async (e) => {
+    e.preventDefault()
+
+    try {
+      let requestBody = {
+        name,
+        email,
+        password
+      }
+
+      let response = await axios.post("http://localhost:3000/register", requestBody, {
+          headers: {
+              'Access-Control-Allow-Origin': '*'
+          }
+      })
+
+      console.log(response.data);
+      navigate("/login")
+
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   return (
     <>
       <div className="hero min-h-screen bg-base-200">
@@ -16,7 +46,7 @@ const Register = () => {
               <div className="w-full p-6 rounded-lg shadow dark:border max-w-sm dark:bg-gray-800 dark:border-gray-700">
                 <h1 className="text-xl font-bold mb-4">Sign Up</h1>
 
-                <form className="space-y-5 text-white">
+                <form onSubmit={handleRegister} className="space-y-5 text-white">
                   <label className="input input-bordered flex items-center gap-2">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -30,6 +60,7 @@ const Register = () => {
                       type="text"
                       className="grow"
                       placeholder="Full Name"
+                      onChange={(e) => setName(e.target.value)}
                     />
                   </label>
 
@@ -47,6 +78,7 @@ const Register = () => {
                       type="email"
                       className="grow"
                       placeholder="Email"
+                      onChange={(e) => setEmail(e.target.value)}
                     />
                   </label>
 
@@ -67,6 +99,7 @@ const Register = () => {
                       type="password"
                       className="grow"
                       placeholder="Password"
+                      onChange={(e) => setPassword(e.target.value)}
                     />
                   </label>
 
