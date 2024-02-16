@@ -166,7 +166,7 @@ class Controller {
                 email
             })
 
-            res.status(204).json({message:`Data ${id} has been updated`})
+            res.status(200).json({message:`Data ${id} has been updated`})
             
         } catch (error) {
             console.log(error);
