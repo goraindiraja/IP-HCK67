@@ -1,6 +1,14 @@
 const { comparePassword } = require('../helpers/bcrypt');
 const { signToken } = require('../helpers/jwt');
 const {User} = require('../models');
+const cloudinary = require('cloudinary').v2;
+
+cloudinary.config ({
+    cloud_name: process.env.CLOUD_NAME,
+    api_key: process.env.API_KEY,
+    api_secret: process.env.API_SECRET,
+    secure: true
+})
 
 class Controller {
     static async userRegister(req, res, next){
@@ -137,6 +145,55 @@ class Controller {
                 email: user.email,
                 imageUrl: user.imageUrl
             })
+
+        } catch (error) {
+            console.log(error);
+            next(error)
+        }
+    }
+
+    static async updateUser(req, res, next){
+        try {
+            let {id} = req.params
+            let user = await User.findByPk(id)
+
+            if(!user){
+                throw {name: "NotFound"}
+            }
+
+            const {name, email} = req.body
+
+            let updatedUser = await user.update({
+                name, 
+                email
+            })
+
+            res.status(204).json({message:`Data ${id} has been updated`})
+            
+        } catch (error) {
+            console.log(error);
+            next(error)
+        }
+    }
+
+    static async updateImage(req, res, next){
+        try {
+            let {id} = req.params
+            let user = await User.findByPk(id)
+
+            if(!user){
+                throw {name: "NotFound"}
+            }
+
+            const buffer = req.file.buffer
+            const b64File = Buffer.from(buffer).toString("base64")
+            const dataURI = `data:${req.file.mimetype};base64,${b64File}`
+
+            let result = await cloudinary.uploader.upload(dataURI)
+            console.log(result.url);
+            await user.update({imageUrl: result.url})
+
+            res.status(200).json({message: `Image User ${id} has been updated`})
 
         } catch (error) {
             console.log(error);
