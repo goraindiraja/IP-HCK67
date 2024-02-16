@@ -1,4 +1,5 @@
 import axios from 'axios';
+import Swal from 'sweetalert2'
 import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom';
 
@@ -29,6 +30,11 @@ const Register = () => {
 
     } catch (error) {
       console.log(error);
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: error.response.data.message
+      })
     }
   }
 

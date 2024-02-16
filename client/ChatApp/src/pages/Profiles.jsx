@@ -1,3 +1,4 @@
+import Swal from 'sweetalert2'
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import Navbar from '../assets/components/Navbar';
@@ -86,7 +87,7 @@ const Profiles = () => {
         <Navbar/>
         <div className="hero min-h-screen bg-base-200">
         <div className="hero-content lg:w-[30rem] text-center">
-            <div className="border w-full">
+            <div className="w-full">
             <h1 className="text-3xl font-bold py-6">Update Profile</h1>
             <div className="w-full flex justify-center">
                 <img className='w-28 rounded-full' alt="Tailwind CSS Navbar component" src={imageUrl} />

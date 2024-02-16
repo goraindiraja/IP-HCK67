@@ -2,6 +2,7 @@ import { addDoc, collection, serverTimestamp } from 'firebase/firestore'
 import React, { useEffect, useState } from 'react'
 import { db } from '../../firebase'
 import axios from 'axios'
+import Swal from 'sweetalert2'
 
 const SendMessage = () => {
     const [value, setValue] = useState("")
@@ -13,7 +14,12 @@ const SendMessage = () => {
         event.preventDefault()
 
         if(value.trim() === ""){
-            alert("Enter valid message")
+            Swal.fire({
+                icon: "error",
+                title: "Oops...",
+                text: "Text Cannot be Empty"
+            })
+
             return
         }
 
