@@ -57,9 +57,7 @@ class Controller {
             console.log("User Valid");
 
             const token = signToken({
-                id: user.id,
-                name: user.name,
-                email: user.email
+                id: user.id
             })
 
             res.status(200).json({
