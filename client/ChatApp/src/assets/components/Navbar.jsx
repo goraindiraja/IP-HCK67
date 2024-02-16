@@ -16,7 +16,7 @@ const Navbar = () => {
         <div className='bg-slate-800 text-white fixed z-10 w-full'>
             <div className="navbar containerWrap">
                 <div className="flex-1">
-                    <a className="text-xl font-bold">ChatApp!</a>
+                    <Link to="/" className="text-xl font-bold">ChatApp!</Link>
                 </div>
                 <div className="flex-none gap-2">
                     <div>

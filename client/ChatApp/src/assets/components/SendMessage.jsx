@@ -1,9 +1,13 @@
 import { addDoc, collection, serverTimestamp } from 'firebase/firestore'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { db } from '../../firebase'
+import axios from 'axios'
 
 const SendMessage = () => {
     const [value, setValue] = useState("")
+    const [name, setName] = useState("")
+    const [email, setEmail] = useState("")
+    const [imageUrl, setImageUrl] = useState("")
     
     const handleMessage = async (event) => {
         event.preventDefault()
@@ -16,8 +20,8 @@ const SendMessage = () => {
         try {
             await addDoc(collection(db, "messages"), {
                 text: value,
-                name: localStorage.getItem("name"),
-                imageUrl: localStorage.getItem("imageUrl"),
+                name,
+                imageUrl,
                 senderId: localStorage.getItem("currentId"),
                 createdAt: serverTimestamp()
             })
@@ -27,6 +31,30 @@ const SendMessage = () => {
             console.log(error);
         }
     }
+
+    const fetchData = async () => {
+        try {
+            const currentId = localStorage.getItem("currentId")
+            let response = await axios.get("http://localhost:3000/users/"+currentId, {
+                headers: {
+                    'Access-Control-Allow-Origin': '*',
+                    Authorization: `Bearer ${localStorage.getItem("access_token")}`
+                }
+            })
+
+            console.log(response.data);
+            setName(response.data.name)
+            setEmail(response.data.email)
+            setImageUrl(response.data.imageUrl)
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    useEffect(() => {
+        fetchData()
+    }, [])
+
   return (
     <>
         <div className='bg-slate-800 fixed bottom-0 w-full py-10 shadow-lg'>

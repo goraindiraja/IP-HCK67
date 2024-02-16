@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import MessageBuble from './MessageBuble'
 import { collection, query, where, onSnapshot, orderBy } from "firebase/firestore";
 import { db } from '../../firebase';
+import axios from 'axios';
 
 const ChatBox = () => {
     const messagesEndRef = useRef()
