@@ -1,0 +1,23 @@
+[
+    {
+        "id": 1,
+        "name": "John Doe",
+        "email": "john@test.com",
+        "password": "john123",
+        "imageUrl" : "https://randomuser.me/api/portraits/men/34.jpg"
+    },
+    {
+        "id": 2,
+        "name": "Jane Smith",
+        "email": "jane@test.com",
+        "password": "jane123",
+        "imageUrl" : "https://randomuser.me/api/portraits/men/76.jpg"
+    },
+    {
+        "id": 3,
+        "name": "Alice Johnson",
+        "email": "alice@test.com",
+        "password": "alice123",
+        "imageUrl" : "https://randomuser.me/api/portraits/women/90.jpg"
+    }
+]
