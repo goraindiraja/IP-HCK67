@@ -1,7 +1,6 @@
 import React from 'react'
 
 const MessageBuble = ({id, message, name, image}) => {
-    console.log(id);
     return (
         <>
             <div className={`chat ${id === localStorage.getItem("currentId") ? "chat-end": "chat-start"}`}>

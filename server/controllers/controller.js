@@ -191,7 +191,10 @@ class Controller {
             console.log(result.url);
             await user.update({imageUrl: result.url})
 
-            res.status(200).json({message: `Image User ${id} has been updated`})
+            res.status(200).json({
+                message: `Image User ${id} has been updated`,
+                imageUrl: result.url
+            })
 
         } catch (error) {
             console.log(error);

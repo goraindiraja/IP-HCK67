@@ -46,12 +46,16 @@ const Profiles = () => {
                     }
                 })
 
-                console.log(responseFile)
-                // navigate("/")
-            }
-
-            console.log(response.data);
-            fetchData()
+                console.log(responseFile.data)
+                console.log(responseFile.data.imageUrl)
+                localStorage.setItem("imageUrl", responseFile.data.imageUrl)
+              }
+              
+              console.log(response.data);
+              localStorage.setItem("name", name)
+              localStorage.setItem("email", email)
+              fetchData()
+              navigate("/")
 
         } catch (error) {
             console.log(error);

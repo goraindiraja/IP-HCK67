@@ -1,12 +1,17 @@
 import Swal from 'sweetalert2'
 import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import { login, userSlice } from '../redux/userSlice';
 import {GoogleAuthProvider, onAuthStateChanged,signInWithPopup} from "firebase/auth";
 import { auth } from '../firebase';
 import axios from "axios"
 
 const Login = () => {
     const navigate = useNavigate()
+    // const dispatch = useDispatch()
+    // const {currentId, email: emailRedux, name, imageUrl} = useSelector((state) => state.userSlice)
+
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
 
@@ -27,6 +32,7 @@ const Login = () => {
             })
 
             console.log(response.data)
+            // dispatch(login(response.data))
             localStorage.setItem("access_token", response.data.access_token)
             localStorage.setItem("currentId", response.data.currentId)
             localStorage.setItem("name", response.data.name)
