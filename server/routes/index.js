@@ -7,6 +7,9 @@ const multer = require('multer');
 const storage = multer.memoryStorage()
 const upload = multer({storage: storage})
 
+router.get('/', (req, res) => {
+    res.status(200).json("Server is running")
+});
 
 router.post("/register", Controller.userRegister)
 
@@ -21,6 +24,5 @@ router.get("/users/:id", authentication, Controller.getUserById)
 router.put("/users/:id", authentication, Controller.updateUser)
 
 router.patch("/users/:id/img", authentication, upload.single('image'), Controller.updateImage)
-
 
 module.exports = router

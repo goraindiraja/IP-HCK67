@@ -11,7 +11,7 @@ const MessageBuble = ({id, message, name, image}) => {
                 </div>
                 <div className="chat-header">
                     {name}
-                    {/* <time className="text-xs opacity-50">12:45</time> */}
+                    <time className="text-xs opacity-50"> 12:45 </time>
                 </div>
                 <div className="chat-bubble">{message}</div>
             </div>

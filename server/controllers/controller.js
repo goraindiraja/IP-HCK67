@@ -3,6 +3,7 @@ const { signToken } = require('../helpers/jwt');
 const {User} = require('../models');
 const cloudinary = require('cloudinary').v2;
 
+//Configure Cloudinary
 cloudinary.config ({
     cloud_name: process.env.CLOUD_NAME,
     api_key: process.env.API_KEY,

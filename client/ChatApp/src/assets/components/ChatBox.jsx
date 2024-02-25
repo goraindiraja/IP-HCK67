@@ -15,14 +15,13 @@ const ChatBox = () => {
     useEffect(scrollToBottom, [messages])
 
     useEffect(() => {
-      const q = query(collection(db, "messages"), orderBy("createdAt"));
-      const unsubscribe = onSnapshot(q, (querySnapshot) => {
-        const messages = [];
-        querySnapshot.forEach((doc) => {
-            messages.push({...doc.data(), id: doc.id});
-        });
-        setMessages(messages)
-        console.log(messages);
+        const q = query(collection(db, "messages"), orderBy("createdAt"));
+        const unsubscribe = onSnapshot(q, (querySnapshot) => {
+            const messages = [];
+            querySnapshot.forEach((doc) => {
+                messages.push({...doc.data(), id: doc.id});
+            });
+            setMessages(messages)
         });
 
         return () => unsubscribe
